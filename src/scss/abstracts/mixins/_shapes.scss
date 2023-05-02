@@ -1,0 +1,239 @@
+@use 'sass:math';
+@use '@/scss/abstracts/functions/strip_unit' as *;
+
+@mixin plus-gradient($width, $thickness, $color) {
+  $offset: strip-unit($thickness) * 5%;
+  $start: 50% - $offset;
+  $end: 50% + $offset;
+
+  width: $width;
+  height: $width;
+  background: linear-gradient(
+      to right,
+      transparent $start,
+      $color $start,
+      $color $end,
+      transparent $end
+    ),
+    linear-gradient(
+      to bottom,
+      transparent $start,
+      $color $start,
+      $color $end,
+      transparent $end
+    );
+}
+
+@mixin plus-pseudo($width, $thickness, $color) {
+  position: relative;
+  width: $width;
+  height: $width;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: $thickness;
+    margin-top: calc($thickness / 2 * -1);
+    background-color: $color;
+  }
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+
+@mixin plus-with-circle(
+  $circle-width,
+  $circle-height,
+  $circle-border-width,
+  $circle-color,
+  $plus-width,
+  $plus-height,
+  $color
+) {
+  position: relative;
+  width: $circle-width;
+  height: $circle-height;
+  border: $circle-border-width solid $circle-color;
+  border-radius: 50%;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: $plus-width;
+    height: $plus-height;
+    margin: auto;
+    background-color: $color;
+  }
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+
+@mixin x($width, $thickness, $color) {
+  position: relative;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: $width;
+    height: $thickness;
+    margin: auto;
+    background-color: $color;
+  }
+  &::before {
+    transform: rotate(-135deg);
+  }
+  &::after {
+    transform: rotate(135deg);
+  }
+}
+
+@mixin arrow-top($width, $tickness, $color) {
+  width: $width;
+  height: $width;
+  border-top: $tickness solid $color;
+  border-left: $tickness solid $color;
+  transform: rotate(45deg);
+}
+
+@mixin arrow-right($width, $tickness, $color) {
+  width: $width;
+  height: $width;
+  border-top: $tickness solid $color;
+  border-left: $tickness solid $color;
+  transform: rotate(135deg);
+}
+
+@mixin arrow-bottom($width, $tickness, $color) {
+  width: $width;
+  height: $width;
+  border-top: $tickness solid $color;
+  border-left: $tickness solid $color;
+  transform: rotate(225deg);
+}
+
+@mixin arrow-left($width, $tickness, $color) {
+  width: $width;
+  height: $width;
+  border-top: $tickness solid $color;
+  border-left: $tickness solid $color;
+  transform: rotate(-45deg);
+}
+
+@mixin triangle-top($width, $height, $color) {
+  border-width: 0 calc($width / 2) $height;
+  border-style: solid;
+  border-color: transparent transparent $color;
+}
+
+@mixin triangle-bottom($width, $height, $color) {
+  border-width: $height calc($width / 2) 0;
+  border-style: solid;
+  border-color: $color transparent transparent;
+}
+
+@mixin triangle-left($width, $height, $color) {
+  border-width: calc($height / 2) $width calc($height / 2) 0;
+  border-style: solid;
+  border-color: transparent transparent transparent $color;
+}
+
+@mixin triangle-right($width, $height, $color) {
+  border-width: calc($height / 2) 0 calc($height / 2) $width;
+  border-style: solid;
+  border-color: transparent transparent transparent $color;
+}
+
+@mixin pause($line-width, $line-height, $color, $line-gap) {
+  $box-width: $line-width * 2 + $line-gap;
+
+  position: relative;
+  width: $box-width;
+  height: $line-height;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: $line-width;
+    height: $line-height;
+    background-color: $color;
+  }
+  &::before {
+    left: 0;
+  }
+  &::after {
+    right: 0;
+  }
+}
+
+@mixin play-with-circle(
+  $circle-width,
+  $circle-height,
+  $circle-color,
+  $play-width,
+  $play-height,
+  $play-color
+) {
+  position: relative;
+  width: $circle-width;
+  height: $circle-height;
+  border-radius: 50%;
+  background-color: $circle-color;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 43%;
+    border-width: calc($play-height / 2) 0 calc($play-height / 2) $play-width;
+    border-style: solid;
+    border-color: transparent transparent transparent $play-color;
+    transform: translateY(-50%);
+  }
+}
+
+@mixin pause-with-circle(
+  $circle-width,
+  $circle-height,
+  $circle-color,
+  $line-width,
+  $line-height,
+  $line-color,
+  $line-gap
+) {
+  $distance: ($line-width + calc($line-gap / 2));
+
+  @if $line-gap % 2 != 0 and $circle-width % 2 == 0 {
+    @error "odd $line-gap in even $circle-width is impossible";
+  }
+
+  @if $line-gap % 2 == 0 and $circle-width % 2 != 0 {
+    @error "even $line-gap in odd $circle-width is impossible";
+  }
+
+  position: relative;
+  width: $circle-width;
+  height: $circle-height;
+  border-radius: 50%;
+  background-color: $circle-color;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: $line-width;
+    height: $line-height;
+    margin: auto;
+    background-color: $line-color;
+  }
+  &::before {
+    transform: translateX($distance * -1);
+  }
+  &::after {
+    transform: translateX($distance);
+  }
+}

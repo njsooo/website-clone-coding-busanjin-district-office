@@ -1,0 +1,59 @@
+.-article_heading_circle {
+    width: 21px;
+    height: 21px;
+    background-position: 0 0;
+}
+
+.-article_heading_rect {
+    width: 6px;
+    height: 13px;
+    background-position: -21px 0;
+}
+
+.-article_home {
+    width: 13px;
+    height: 13px;
+    background-position: -27px 0;
+}
+
+.-article_print {
+    width: 19px;
+    height: 20px;
+    background-position: -40px 0;
+}
+
+.-article_score_1 {
+    width: 24px;
+    height: 23px;
+    background-position: -59px 0;
+}
+
+.-article_score_2 {
+    width: 24px;
+    height: 23px;
+    background-position: -83px 0;
+}
+
+.-article_score_3 {
+    width: 24px;
+    height: 23px;
+    background-position: -107px 0;
+}
+
+.-article_score_4 {
+    width: 24px;
+    height: 23px;
+    background-position: -131px 0;
+}
+
+.-article_score_5 {
+    width: 24px;
+    height: 23px;
+    background-position: -155px 0;
+}
+
+.-article_share {
+    width: 16px;
+    height: 18px;
+    background-position: -179px 0;
+}

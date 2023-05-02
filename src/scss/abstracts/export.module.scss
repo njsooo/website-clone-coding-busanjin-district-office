@@ -1,0 +1,6 @@
+@use './variables/breakpoints';
+
+/* stylelint-disable */
+:export {
+  mobileWidth: breakpoints.$tablet;
+}

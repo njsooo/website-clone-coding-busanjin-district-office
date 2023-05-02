@@ -1,0 +1,19 @@
+@use '@/scss/abstracts/variables/zIndexes' as zIndexes;
+
+#skip {
+  position: relative;
+  z-index: zIndexes.$skip;
+  a {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    padding: 10px 20px;
+    border: 1px solid #fff;
+    background-color: #1e64ba;
+    color: #fff;
+    &:focus,
+    &:active {
+      top: 0;
+    }
+  }
+}

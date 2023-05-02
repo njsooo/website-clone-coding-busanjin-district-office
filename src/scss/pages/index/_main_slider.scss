@@ -1,0 +1,219 @@
+@use '@/scss/abstracts/mixins/mediaQuery' as *;
+@use '@/scss/abstracts/mixins/shapes';
+
+#main-slider {
+  $orange: #f66c47;
+
+  height: 667px; /* the background-image height is 667px */
+  margin-top: 35px;
+  background-color: bisque;
+  background-image: url('/src/assets/images/main_slider_bg.jpg');
+  .container {
+    position: relative;
+    display: flex;
+  }
+  .left {
+    width: 1135px; /* image width is 1135px */
+    backface-visibility: hidden; /* to fix pixel blurry when image resized */
+    .splide__arrow--prev,
+    .splide__arrow--next {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      width: 42px;
+      height: 42px;
+      margin: auto 0;
+      background-color: rgb(0 0 0 / 20%);
+      transform: translateY(-14px);
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: block;
+        margin: auto;
+      }
+    }
+    .splide__arrow--prev {
+      left: 0;
+      &::before {
+        @include shapes.arrow-left(10px, 2px, #fff);
+
+        right: 0;
+        left: 5px;
+        display: block;
+        margin: auto;
+      }
+    }
+    .splide__arrow--next {
+      right: 0;
+      &::before {
+        @include shapes.arrow-right(10px, 2px, #fff);
+
+        right: 5px;
+        left: 0;
+      }
+    }
+    .splide__track {
+      box-shadow: 3px 6px 6px rgb(0 0 0 / 20%);
+    }
+    .pagination-and-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 30px;
+      .splide__pagination {
+        button {
+          width: 16px;
+          height: 16px;
+          margin: 0 5px;
+          border: 3px solid $orange;
+          border-radius: 50%;
+          background-color: transparent;
+          &.is-active {
+            width: 40px;
+            border-radius: 10px;
+            background-color: $orange;
+          }
+        }
+      }
+      .splide__toggle {
+        margin-left: 5px;
+      }
+      .splide__toggle__play {
+        .icon {
+          @include shapes.triangle-right(12px, 14px, $orange);
+
+          display: block;
+        }
+      }
+      .splide__toggle__pause {
+        .icon {
+          @include shapes.pause(3px, 16px, $orange, 3px);
+
+          display: block;
+        }
+      }
+    }
+  }
+  .right {
+    transform: translateX(-13px);
+    .splide__slide {
+      position: relative;
+      padding: 35px 0 0 58px;
+      color: #707070;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 1.2;
+      text-shadow: 3px 4px 4px rgb(0 0 0 / 15%);
+      cursor: pointer;
+      &.is-active {
+        color: #333;
+        &::before {
+          display: block;
+        }
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        top: 25px;
+        left: 0;
+        display: none;
+        width: 55px;
+        height: 5px;
+        background-color: $orange;
+      }
+    }
+  }
+}
+
+@include media-sm-desktop {
+  $right-width: 483px;
+  #main-slider {
+    height: auto;
+    padding-bottom: 35px;
+    background-position: bottom;
+    .container {
+      width: 100%;
+    }
+    .left {
+      width: calc(100% - $right-width);
+      a {
+        display: block;
+        width: 72vw;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .right {
+      width: $right-width;
+    }
+  }
+}
+
+@media (max-width: 1420px) {
+  $right-width: 387px;
+  #main-slider {
+    .left {
+      width: calc(100% - $right-width);
+    }
+    .right {
+      width: $right-width;
+      .splide__slide {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@include media-tablet {
+  #main-slider {
+    margin-top: 0;
+    padding: 20px;
+    background-position: center 66%;
+    .left {
+      width: 100%;
+      .pagination-and-toggle {
+        margin-top: 12px;
+      }
+      a {
+        width: 100%;
+      }
+    }
+    .right {
+      display: none;
+    }
+  }
+}
+
+@include media-phone {
+  #main-slider {
+    background-color: transparent;
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    .left {
+      .pagination-and-toggle {
+        margin-top: 7px;
+        .splide__pagination {
+          button {
+            width: 11px;
+            height: 11px;
+            margin: 0 2px;
+            border-width: 2px;
+          }
+        }
+        .splide__toggle {
+          .splide__toggle__pause {
+            .icon {
+              height: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

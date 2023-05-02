@@ -1,0 +1,9 @@
+@use 'sass:math';
+
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+/// 16px / 1px is 16.
+/// Since the unit of $number is dynamic, ($number * 0 + 1) is used to determine unit.
+@function strip-unit($number) {
+  @return math.div($number, ($number * 0 + 1));
+}

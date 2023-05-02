@@ -1,0 +1,468 @@
+@use '@/scss/abstracts/mixins/mediaQuery' as *;
+@use '@/scss/abstracts/mixins/shapes';
+@use '@/scss/abstracts/mixins/utils';
+@use '@/scss/abstracts/variables/commons';
+
+$left-width: 378px;
+$left-height: 366px;
+$gap: 30px;
+$center-width: commons.$container-width - ($gap * 2) - ($left-width * 2);
+$tab-height: 52px;
+$more-width: 62px;
+$box-shadow-right-bottom: 3px 6px 6px #ccc;
+$gray: #e7e7e7;
+$navy: #373777;
+
+#notice {
+  padding-top: 36px;
+  .container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    padding-bottom: 43px;
+    background: url('/src/assets/images/dot_hr.png') repeat-x bottom;
+  }
+  .left {
+    width: $left-width;
+    box-shadow: $box-shadow-right-bottom;
+    li {
+      a {
+        display: block;
+        box-sizing: border-box;
+        height: calc($left-height / 3);
+        padding: 18px 0 0 30px;
+        .title {
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 1.2;
+          letter-spacing: -0.04em;
+        }
+        .desc {
+          margin-top: 5px;
+          color: #555;
+          line-height: 1.2;
+          letter-spacing: -0.03em;
+        }
+      }
+      &:nth-child(1) {
+        a {
+          background: #ffe6e6 url('/src/assets/images/notice_left_01.png')
+            no-repeat right 18px bottom -30px;
+        }
+        .title {
+          color: #d54343;
+        }
+      }
+      &:nth-child(2) {
+        a {
+          background: #f7f2c8 url('/src/assets/images/notice_left_02.png')
+            no-repeat right bottom -40px;
+        }
+        .title {
+          color: #925e19;
+        }
+      }
+      &:nth-child(3) {
+        a {
+          background: #e5e2fd url('/src/assets/images/notice_left_03.png')
+            no-repeat right top;
+        }
+        .title {
+          color: #1b1b8c;
+        }
+      }
+    }
+  }
+  .center {
+    box-sizing: border-box;
+    width: $center-width;
+    border: 1px solid $gray;
+    box-shadow: $box-shadow-right-bottom;
+    [role='tablist'] {
+      display: flex;
+      [role='tab'] {
+        display: block;
+        box-sizing: border-box;
+        width: calc((100% - $more-width) / 4);
+        height: $tab-height;
+        border-right: 1px solid $gray;
+        border-bottom: 1px solid $gray;
+        color: #111;
+        font-size: 20px;
+        text-align: center;
+        &.on {
+          border-color: $navy;
+          background-color: $navy;
+          color: #fff;
+        }
+      }
+    }
+    [role='tabpanel'] {
+      position: relative;
+      display: none;
+      padding: 42px 45px 0;
+      &.on {
+        display: block;
+      }
+      ul {
+        li ~ li {
+          margin-top: 19px;
+        }
+        a {
+          display: flex;
+          justify-content: space-between;
+          font-size: 18px;
+          font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+          .title {
+            @include utils.line-clamp(1);
+
+            position: relative;
+            width: 77%;
+            padding-left: 15px;
+            color: #555;
+            transition: color 0.15s;
+            &::before {
+              content: '';
+              position: absolute;
+              top: 1px;
+              bottom: 0;
+              left: 0;
+              width: 4px;
+              height: 4px;
+              margin: auto 0;
+              border-radius: 50%;
+              background-color: #403a3a;
+            }
+          }
+          .date {
+            color: #777;
+            transition: color 0.15s;
+          }
+          &:hover {
+            $blue: #2359f5;
+            .title {
+              color: $blue;
+            }
+            .date {
+              color: $blue;
+            }
+          }
+        }
+      }
+      .empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+      }
+      .more {
+        position: absolute;
+        top: -$tab-height;
+        right: 0;
+        box-sizing: border-box;
+        width: $more-width;
+        height: $tab-height;
+        border-bottom: 1px solid $gray;
+        background-color: #f0f0f0;
+        &::before {
+          @include shapes.plus-gradient(16px, 1px, #46494e);
+
+          content: '';
+          position: absolute;
+          inset: 0;
+          margin: auto;
+        }
+      }
+    }
+  }
+  .right {
+    position: relative;
+    width: $left-width;
+    height: $left-height;
+    box-shadow: $box-shadow-right-bottom;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: url('/src/assets/images/notice_right_bg.jpg') no-repeat;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: url('/src/assets/images/notice_right_person.png') no-repeat
+        right -5px bottom -5px;
+    }
+    .top {
+      padding: 0 27px;
+      .title {
+        margin-top: 40px;
+        color: #d84e03;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 1.2;
+      }
+      .desc {
+        margin-top: 35px;
+        color: #333;
+        font-size: 30px;
+        line-height: 1.2;
+        letter-spacing: -0.04em;
+        em {
+          font-weight: 700;
+        }
+      }
+    }
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      width: 100%;
+      background-color: rgb(0 0 0 / 50%);
+      li {
+        flex: 1;
+        &:first-child {
+          position: relative;
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            display: block;
+            width: 1px;
+            height: 20px;
+            margin: auto 0;
+            background-color: rgb(255 255 255 / 50%);
+          }
+        }
+      }
+      a {
+        display: block;
+        height: 54px;
+        color: #fff;
+        font-size: 20px;
+        line-height: 54px;
+        text-align: center;
+        transition: color 0.3s ease-out;
+        &:hover {
+          color: #ff8260;
+        }
+      }
+    }
+  }
+}
+
+@include media-sm-desktop {
+  #notice {
+    .container {
+      flex-wrap: wrap;
+      gap: 0;
+      width: 100%;
+    }
+    .left {
+      display: flex;
+      order: 1;
+      width: 50%;
+      li {
+        flex: 1;
+        a {
+          height: $left-height;
+          padding-left: 15px;
+        }
+        &:nth-child(1) a,
+        &:nth-child(2) a,
+        &:nth-child(3) a {
+          background-position: bottom;
+        }
+      }
+    }
+    .center {
+      $more-width: 80px;
+
+      order: 3;
+      box-sizing: border-box;
+      width: 100%;
+      height: $left-height;
+      min-height: $left-height;
+      margin-top: 40px;
+      [role='tablist'] {
+        [role='tab'] {
+          width: calc((100% - $more-width) / 4);
+        }
+      }
+      [role='tabpanel'] {
+        box-sizing: border-box;
+        .more {
+          width: $more-width;
+        }
+      }
+    }
+    .right {
+      z-index: 1; /* due to .left box-shadow */
+      order: 2;
+      width: 50%;
+      &::before {
+        background-size: cover;
+      }
+    }
+  }
+}
+
+@include media-tablet {
+  #notice {
+    margin-top: 0;
+    .container {
+      padding-bottom: 20px;
+    }
+    .left {
+      width: 100%;
+      li {
+        a {
+          height: 258px;
+          .title {
+            font-size: 18px;
+          }
+          .desc {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .center {
+      $tab-height: 40px;
+      $more-width: 70px;
+
+      order: 2;
+      height: 290px;
+      min-height: 290px;
+      margin-top: 20px;
+      [role='tablist'] {
+        [role='tab'] {
+          width: calc((100% - $more-width) / 4);
+          height: $tab-height;
+          font-size: 15px;
+        }
+      }
+      [role='tabpanel'] {
+        padding: 35px 20px 0;
+        ul {
+          li ~ li {
+            margin-top: 14px;
+          }
+          a {
+            .title {
+              font-size: 14px;
+            }
+            .date {
+              font-size: 14px;
+            }
+          }
+        }
+        .more {
+          top: -$tab-height;
+          width: $more-width;
+          height: $tab-height;
+          &::before {
+            width: 12px;
+            height: 12px;
+            transform: translateY(1px);
+          }
+        }
+        .empty {
+          font-size: 1rem;
+        }
+      }
+    }
+    .right {
+      order: 3;
+      width: 100%;
+      height: 276px;
+      margin-top: 20px;
+      &::after {
+        background-size: 206px;
+      }
+      .top {
+        padding: 0 30px;
+        .title {
+          font-size: 18px;
+        }
+        .desc {
+          margin-top: 30px;
+          font-size: 27px;
+        }
+      }
+      .bottom {
+        li {
+          &:first-child {
+            &::after {
+              height: 16px;
+            }
+          }
+        }
+        a {
+          height: 40px;
+          font-size: 15px;
+          line-height: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  #notice {
+    .center {
+      $more-width: 60px;
+
+      height: 225px;
+      min-height: 225px;
+      [role='tablist'] {
+        [role='tab'] {
+          width: calc((100% - $more-width) / 4);
+        }
+      }
+      [role='tabpanel'] {
+        padding: 20px 15px 0;
+        ul {
+          li ~ li {
+            margin-top: 8px;
+          }
+        }
+        .more {
+          width: $more-width;
+        }
+      }
+    }
+    .right {
+      height: 184px;
+      &::after {
+        background-position: right -20px bottom -25px;
+        background-size: 162px;
+      }
+      .top {
+        padding: 0 20px;
+        .title {
+          margin-top: 20px;
+          font-size: 14px;
+        }
+        .desc {
+          margin-top: 15px;
+          font-size: 18px;
+        }
+      }
+      .bottom {
+        a {
+          height: 30px;
+          font-size: 13px;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+}

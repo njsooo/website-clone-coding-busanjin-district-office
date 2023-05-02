@@ -1,0 +1,19 @@
+@use '@/scss/abstracts/variables/breakpoints';
+
+@mixin media-sm-desktop {
+  @media screen and (max-width: breakpoints.$sm-desktop) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media screen and (max-width: breakpoints.$tablet) {
+    @content;
+  }
+}
+
+@mixin media-phone {
+  @media screen and (max-width: breakpoints.$phone) {
+    @content;
+  }
+}

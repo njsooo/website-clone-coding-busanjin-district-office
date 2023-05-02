@@ -1,0 +1,141 @@
+@use '@/scss/abstracts/mixins/mediaQuery' as *;
+@use '@/scss/abstracts/mixins/utils';
+
+#external-links {
+  padding-top: 40px;
+  ul {
+    display: flex;
+    border: 1px solid #ccc;
+  }
+  li {
+    width: 12.5%;
+    border-right: 1px solid #ccc;
+    transition: background-color 0.3s ease-out;
+    &:last-child {
+      border-right: 0;
+    }
+    &:hover {
+      background-color: #d9e6ff;
+    }
+    a {
+      display: block;
+      padding: 26px 0 20px;
+      .icon {
+        position: relative;
+        display: block;
+        height: 65px;
+        margin: 0 auto;
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          margin: auto;
+          background: url('/src/assets/images/index_sprite_sheet.png') no-repeat;
+        }
+      }
+      .text {
+        display: block;
+        margin-top: 15px;
+        color: #333;
+        font-size: 15px;
+        letter-spacing: -0.05em;
+        text-align: center;
+      }
+    }
+    &:nth-child(1) a .icon::before {
+      width: 54px;
+      height: 54px;
+      background-position: 0 0;
+    }
+    &:nth-child(2) a .icon::before {
+      width: 54px;
+      height: 57px;
+      background-position: -54px 0;
+    }
+    &:nth-child(3) a .icon::before {
+      width: 65px;
+      height: 55px;
+      background-position: -108px 0;
+    }
+    &:nth-child(4) a .icon::before {
+      width: 60px;
+      height: 60px;
+      background-position: -173px 0;
+    }
+    &:nth-child(5) a .icon::before {
+      width: 64px;
+      height: 47px;
+      background-position: -233px 0;
+    }
+    &:nth-child(6) a .icon::before {
+      width: 51px;
+      height: 64px;
+      background-position: -297px 0;
+    }
+    &:nth-child(7) a .icon::before {
+      width: 62px;
+      height: 52px;
+      background-position: 0 -64px;
+    }
+    &:nth-child(8) a .icon::before {
+      width: 45px;
+      height: 65px;
+      background-position: -348px 0;
+    }
+  }
+}
+
+@include media-sm-desktop {
+  #external-links {
+    .container {
+      width: 100%;
+    }
+  }
+}
+
+@include media-tablet {
+  #external-links {
+    li {
+      a {
+        padding: 10px 0;
+        .icon {
+          height: 44px;
+          &::before {
+            transform: scale(0.6);
+          }
+        }
+        .text {
+          @include utils.line-clamp(1);
+
+          margin-top: 5px;
+          padding: 0 5px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  #external-links {
+    ul {
+      flex-wrap: wrap;
+    }
+    li {
+      width: 25%;
+      border: 0;
+      a {
+        padding: 13px 0;
+        .icon {
+          height: 38px;
+          &::before {
+            transform: scale(0.55);
+          }
+        }
+        .text {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

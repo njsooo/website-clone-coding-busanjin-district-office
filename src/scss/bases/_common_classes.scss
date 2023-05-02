@@ -1,0 +1,11 @@
+@use '@/scss/abstracts/variables/commons' as *;
+@use '@/scss/abstracts/mixins/utils' as *;
+
+.container {
+  width: $container-width;
+  margin: 0 auto;
+}
+
+.blind {
+  @include blind;
+}
